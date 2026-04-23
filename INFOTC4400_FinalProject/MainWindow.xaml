@@ -5,9 +5,132 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INFOTC4400_FinalProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="500">
     <Grid>
-        <ListBox Name="GroceryList" HorizontalAlignment="Left" Height="405" Margin="645,19,0,0" VerticalAlignment="Top" Width="145" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="130"/>
+                </Grid.RowDefinitions>
+                <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
+                <ListBox Name="GroceryList" Grid.Row="1" HorizontalAlignment="Left" Height="350" Margin="25,10,0,0" VerticalAlignment="Top" Width="145" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <Label Content="Notes" Grid.Row="2" FontWeight="Bold" FontSize="15" Margin="75,5,75,0" Width="52" VerticalAlignment="Top" Grid.RowSpan="3"/>
+                <TextBox Name="NotesBox" Grid.Row="3" HorizontalAlignment="Left" Height="120" Margin="25,0,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="145"/>
+            </Grid>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="96"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Sunday" FontSize="15"  Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Monday" FontSize="15" Margin="5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Tuesday" FontSize="15" Margin="5" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Wednesday" FontSize="15" Margin="5" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Thursday" FontSize="15" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Friday" FontSize="15" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="5,5,5,5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <Label Content="Saturday" FontSize="15" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="5">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+                <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
+
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

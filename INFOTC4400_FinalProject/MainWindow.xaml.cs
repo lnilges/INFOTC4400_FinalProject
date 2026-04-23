@@ -20,6 +20,11 @@ namespace INFOTC4400_FinalProject
         {
             InitializeComponent();
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
 
