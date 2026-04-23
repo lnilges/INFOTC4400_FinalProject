@@ -22,3 +22,22 @@ namespace INFOTC4400_FinalProject
         }
     }
 }
+
+
+//Components:
+
+//Meal class 
+//Ingredient class
+//GroceryItem class - inherits from ingredient bc is an ingredient & need more of
+//MealPlan, collection of meals??
+
+//requirements:
+//Loops - loop through the items in a list of grocery items to display on grocery list
+//Methods - to create meal objects, groceryItem objects, edit/delete from either
+//Classes - classes for meal and GroceryItems
+//Inheritance - groceryItems inherits from Ingredient
+//Strings, Array or Lists - list to store ingredients/gorcerylist items
+//Model-View-Controller (MVC) software architecture 
+//Multithreading - loading meals from database
+//Searching and Sorting, or LINQ - filtering meals by name/ingredient
+//Exception Handling
