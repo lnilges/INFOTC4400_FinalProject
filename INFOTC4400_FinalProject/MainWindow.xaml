@@ -5,32 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INFOTC4400_FinalProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500">
+        Title="MainWindow" Height="600" Width="500" Background="AntiqueWhite">
     <Grid>
         <Grid>
+            <!--This is to split the "plan" side and "Grocery/notes" side of the -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="130"/>
-                </Grid.RowDefinitions>
-                <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
-                <ListBox Name="GroceryList" Grid.Row="1" HorizontalAlignment="Left" Height="350" Margin="25,10,0,0" VerticalAlignment="Top" Width="145" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-                <Label Content="Notes" Grid.Row="2" FontWeight="Bold" FontSize="15" Margin="75,5,75,0" Width="52" VerticalAlignment="Top" Grid.RowSpan="3"/>
-                <TextBox Name="NotesBox" Grid.Row="3" HorizontalAlignment="Left" Height="120" Margin="25,0,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="145"/>
-            </Grid>
-            <Grid Grid.Column="0">
+            
+            <!--This is for the right side rows -->
+            <Border Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="0" BorderThickness="2">
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="130"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
+                    <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" Name="GroceryList" Grid.Row="1" HorizontalAlignment="Left" Height="350" Margin="25,0,0,0" VerticalAlignment="Top" Width="145" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    <Label Content="Notes" Grid.Row="2" FontWeight="Bold" FontSize="15" Margin="75,0,75,0" Width="52" VerticalAlignment="Top"/>
+                    <TextBox Name="NotesBox" Grid.Row="3" HorizontalAlignment="Left" Height="120" Margin="25,0,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="145"/>
+                </Grid>
+            </Border>
+
+            <!--This is for the left-side columns for the grid-->
+
+            <Grid Grid.Column="0" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
+                <!--This is for the week day columns-->
+                <Grid.RowDefinitions >
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -39,6 +48,115 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                
+                <!--This is for meal row-->
+                <!--Sunday-->
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    </Grid>
+                </Border>
+
+                <!--Monday-->
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
+                <!--Tuesday-->
+                <Border Grid.Row="2" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
+                <!--WednesDay-->
+                <Border Grid.Row="3" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
+                <!--Thursday-->
+                <Border Grid.Row="4" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="4" Grid.Column="1">
+                <Grid.RowDefinitions>
+                        
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
+                <!--Friday-->
+                <Border Grid.Row="5" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
+                <!--Saturday-->
+                <Border Grid.Row="6" Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="2" BorderThickness="2">
+                <Grid Grid.Row="6" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                </Grid>
+                </Border>
+
                 <Label Content="Sunday" FontSize="15"  Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                     <Label.LayoutTransform>
                         <TransformGroup>
@@ -109,27 +227,6 @@
                         </TransformGroup>
                     </Label.LayoutTransform>
                 </Label>
-                <TextBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
-                <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Breakfast" VerticalAlignment="Top" Width="120"/>
-
-
             </Grid>
         </Grid>
     </Grid>
