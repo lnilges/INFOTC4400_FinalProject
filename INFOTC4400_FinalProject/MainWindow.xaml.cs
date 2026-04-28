@@ -34,8 +34,8 @@ namespace INFOTC4400_FinalProject
 //Meal class 
 //Ingredient class
 //GroceryItem class - inherits from ingredient bc is an ingredient & need more of
-//MealPlan, collection of meals??
-//notes??
+//MealPlan, collection of meals
+//notes
 
 //requirements:
 //Loops - loop through the items in a list of grocery items to display on grocery list
