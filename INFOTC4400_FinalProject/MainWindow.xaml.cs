@@ -1,6 +1,7 @@
 ﻿ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,8 +22,19 @@ namespace INFOTC4400_FinalProject
             InitializeComponent();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GroceryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void SundayBreakfast(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            //want to have a popul to add/delete/edit the items in grocery list
 
         }
     }
