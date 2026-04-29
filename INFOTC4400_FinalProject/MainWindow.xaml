@@ -20,14 +20,14 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="275"/>
                     </Grid.RowDefinitions>
 
                     <!--Grocery List/Ingredient-->
-                    <Button Grid.Row="0" Height="23" Width="50" Content="Clear All" BorderBrush="RosyBrown" Background="white" Click="ClearAllButton_Click" Margin="10,10,188,17"/>
+                    <Button Grid.Row="0" Height="23" Width="60" Content="Clear All" BorderBrush="RosyBrown" Background="white" Click="ClearAllButton_Click" HorizontalAlignment="Left" Margin="10,10,178,17"/>
 
-                    <ComboBox x:Name="FilterComboBox" Grid.Row="2" Width="60" Height="23" HorizontalAlignment="Right" Margin="0,2,10,5">
+                    <ComboBox x:Name="FilterComboBox" Grid.Row="0" Width="60" Height="23" HorizontalAlignment="Right" Background="White" Margin="0,9,10,18">
                         <ComboBoxItem IsSelected="True" Content="Filter"/>
                         <ComboBoxItem Content="A-Z"/>
                         <ComboBoxItem Content="Z-A"/>
@@ -35,30 +35,48 @@
                     <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
                     <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" x:Name="GroceryListBox" Grid.Row="1" HorizontalAlignment="Left" Height="250" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="GroceryList_SelectionChanged" />
 
-                    <Label Content="Item" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,30,0,173" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="ItemName_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,30,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Item" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="ItemName_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
 
-                    <Label Content="Amount" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,60,0,173" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Amount_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Amount" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,30,0,0"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Amount_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" Margin="0,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
 
-                    <Label Content="Category" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,90,0,150" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Category_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,90,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Category" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,60,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Category_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
 
-                    <Button Grid.Row="3" Height="23" Width="50" Content="Save" BorderBrush="RosyBrown" Background="white" Click="SaveButton_Click" Margin="188,88,10,129"/>
-                    <Button Grid.Row="3" Height="23" Width="50" Content="Delete" BorderBrush="RosyBrown" Background="white" Click="DeleteButton_Click" Margin="133,88,65,129"/>
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Save" BorderBrush="RosyBrown" Background="white" Click="SaveButton_Click" Margin="188,55,0,129"/>
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Delete" BorderBrush="RosyBrown" Background="white" Click="DeleteButton_Click" Margin="138,55,60,129"/>
 
                     <!--Meals-->
-                    <Label Content="Meal Name" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="8,145,0,0" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Meal_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,145,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Meal Name" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,117,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Meal_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" Margin="0,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
 
-                    <Label Content="Day" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,175,0,0" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Day_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Day" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,147,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Day_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" Margin="0,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
 
-                    <Label Content="Link" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,235,0,0" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Time_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,235,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Time" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,177,0,0" Grid.RowSpan="2"/>
+                    <ComboBox Grid.Row="3" Height="23" Width="150" Margin="0,180,0,72" HorizontalAlignment="Right">
+                        <ComboBoxItem IsSelected="True" Content="Breakfast"/>
+                        <ComboBoxItem Content="Lunch"/>
+                        <ComboBoxItem Content="Dinner"/>
+                    </ComboBox>
 
-                    <Label Content="Time" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,205,0,0" Grid.RowSpan="2"/>
-                    <TextBox BorderBrush="RosyBrown" Name="Link_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,205,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <Label Content="Repeat" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,207,0,0"/>
+                    
+
+                    <Label Content="Link" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,237,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Time_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+                    <CheckBox Content="Mon" HorizontalAlignment="Left" Margin="55,208,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Tue" HorizontalAlignment="Left" Margin="105,208,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Wed" HorizontalAlignment="Left" Margin="155,208,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Thu" HorizontalAlignment="Left" Margin="205,208,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Fri" HorizontalAlignment="Left" Margin="75,225,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Sat" HorizontalAlignment="Left" Margin="125,225,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <CheckBox Content="Sun" HorizontalAlignment="Left" Margin="175,225,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+
+
+
+
                 </Grid>
             </Border>
 
