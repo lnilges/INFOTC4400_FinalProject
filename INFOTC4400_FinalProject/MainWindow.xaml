@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INFOTC4400_FinalProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500" Background="AntiqueWhite">
+        Title="MainWindow" Height="600" Width="550" Background="AntiqueWhite">
     <Grid>
         <Grid>
             <!--This is to split the "plan" side and "Grocery/notes" side of the -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
-            
+
             <!--This is for the right side rows -->
             <Border Grid.Column="1" BorderBrush="RosyBrown" CornerRadius="0" BorderThickness="1">
                 <Grid Grid.Column="1">
@@ -21,12 +21,44 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="130"/>
+                        <RowDefinition Height="240"/>
                     </Grid.RowDefinitions>
+
+                    <!--Grocery List/Ingredient-->
+                    <Button Grid.Row="0" Height="23" Width="50" Content="Clear All" BorderBrush="RosyBrown" Background="white" Click="ClearAllButton_Click" Margin="10,10,188,17"/>
+
+                    <ComboBox x:Name="FilterComboBox" Grid.Row="2" Width="60" Height="23" HorizontalAlignment="Right" Margin="0,2,10,5">
+                        <ComboBoxItem IsSelected="True" Content="Filter"/>
+                        <ComboBoxItem Content="A-Z"/>
+                        <ComboBoxItem Content="Z-A"/>
+                    </ComboBox>
                     <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
-                    <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" Name="GroceryList" Grid.Row="1" HorizontalAlignment="Left" Height="350" Margin="25,0,0,0" VerticalAlignment="Top" Width="145" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-                    <Label Content="Notes" Grid.Row="2" FontWeight="Bold" FontSize="15" Margin="75,0,75,0" Width="52" VerticalAlignment="Top"/>
-                    <TextBox BorderBrush="RosyBrown" Name="NotesBox" Grid.Row="3" HorizontalAlignment="Left" Height="120" Margin="25,0,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="145"/>
+                    <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" x:Name="GroceryListBox" Grid.Row="1" HorizontalAlignment="Left" Height="250" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="GroceryList_SelectionChanged" />
+
+                    <Label Content="Item" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,30,0,173" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="ItemName_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,30,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Label Content="Amount" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,60,0,173" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Amount_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Label Content="Category" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,90,0,150" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Category_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,90,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Save" BorderBrush="RosyBrown" Background="white" Click="SaveButton_Click" Margin="188,88,10,129"/>
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Delete" BorderBrush="RosyBrown" Background="white" Click="DeleteButton_Click" Margin="133,88,65,129"/>
+
+                    <!--Meals-->
+                    <Label Content="Meal Name" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="8,145,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Meal_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,145,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Label Content="Day" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,175,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Day_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Label Content="Link" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,235,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Time_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,235,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
+
+                    <Label Content="Time" Grid.Row="2" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="10,205,0,0" Grid.RowSpan="2"/>
+                    <TextBox BorderBrush="RosyBrown" Name="Link_TexBox" Grid.Row="2" HorizontalAlignment="Right" Height="23" Margin="0,205,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>
                 </Grid>
             </Border>
 
@@ -43,7 +75,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--This is for meal row-->
                 <!--Sunday-->
                 <Border Grid.Row="0" Grid.Column="1" BorderBrush="RosyBrown" BorderThickness="1">
@@ -52,7 +84,7 @@
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Label Content="Sunday" FontSize="14"  Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                             <Label.LayoutTransform>
                                 <TransformGroup>
@@ -68,74 +100,75 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
                         </Grid>
                     </Grid>
                 </Border>
 
                 <!--Monday-->
                 <Border Grid.Row="1" Grid.Column="1" BorderBrush="RosyBrown" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Content="Monday" FontSize="14" Margin="5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                        <Label.LayoutTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="-90"/>
-                            </TransformGroup>
-                        </Label.LayoutTransform>
-                    </Label>
+                        <Label Content="Monday" FontSize="14" Margin="5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Label.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="-90"/>
+                                </TransformGroup>
+                            </Label.LayoutTransform>
+                        </Label>
 
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                        <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                        <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                        <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+
+                        </Grid>
                     </Grid>
-                </Grid>
                 </Border>
 
                 <!--Tuesday-->
                 <Border Grid.Row="2" Grid.Column="1" BorderBrush="RosyBrown" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Content="Tuesday" FontSize="14" Margin="5" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                        <Label.LayoutTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Label.LayoutTransform>
-                    </Label>
+                        <Label Content="Tuesday" FontSize="14" Margin="5" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Label.LayoutTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Label.LayoutTransform>
+                        </Label>
 
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                    <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                    <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                    <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                        </Grid>
                     </Grid>
-                </Grid>
                 </Border>
 
                 <!--WednesDay-->
@@ -161,9 +194,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -189,14 +222,14 @@
 
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -227,9 +260,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -260,9 +293,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Row="0" Text="Breakfast" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="1" Text="Lunch" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <TextBox Grid.Row="2" Text="Dinner" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
                         </Grid>
                     </Grid>
                 </Border>
