@@ -45,5 +45,5 @@ namespace INFOTC4400_FinalProject
 //Strings, Array or Lists - list to store ingredients/gorcerylist items
 //Model-View-Controller (MVC) software architecture 
 //Multithreading - loading meals from database
-//Searching and Sorting, or LINQ - filtering meals by name/ingredient
+//Searching and Sorting, or LINQ - filtering groceryitems by name/ingredient
 //Exception Handling
