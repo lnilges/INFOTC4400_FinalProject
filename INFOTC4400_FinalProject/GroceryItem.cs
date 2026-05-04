@@ -14,8 +14,6 @@ namespace INFOTC4400_FinalProject
 		public GroceryItem(string ingredientName, int quantity, string measurement, double quantityToPurchase, string category) : base(ingredientName, quantity, measurement)
 		{
 			//I want to add items like ingredients to the grocerylist and then pull the list into the listbox - do with ingredient list in meal class??
-			//List<string> GroceryList = new List<string>();
-
 			IsBought = false;
 			QuantityToPurchase = quantityToPurchase;
 			Category = category;
@@ -46,7 +44,7 @@ namespace INFOTC4400_FinalProject
         public override string ToString()
         {
 			string bought = IsBought ? "[X]" : "[ ]";
-			return $"{bought}{IngredientName} - {QuantityToPurchase}";
+			return $"{bought}{IngredientName} - {QuantityToPurchase}, {Category}";
         }
 
         //method to check off item on list ~~

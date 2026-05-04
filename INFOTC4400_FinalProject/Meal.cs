@@ -4,23 +4,30 @@ using System.Windows.Navigation;
 //Meal class: contains
 namespace INFOTC4400_FinalProject
 {
+	public enum MealTimeType
+	{
+		Breakfast,
+		Lunch,
+		Dinner
+	}
+
 	public class Meal
 	{
-		//properties: MealName, List of ingredients, Link, 
-		public string MealName {  get; set; }
+        //properties: MealName, List of ingredients, Link, 
+        public string MealName {  get; set; }
 		public string Link {  get; set; }
 		public List<Ingredient> Ingredients { get; set; }
 		public List<String> MealDays { get; set; }
-		public string Notes { get; set; }
+		public MealTimeType MealTime { get; set; }
 
 		//constructor
-		public Meal(string mealName, string link, List<Ingredient> ingredients, List<string> mealDays, string notes)
+		public Meal(string mealName, string link, List<Ingredient> ingredients, List<string> mealDays, MealTimeType mealTime)
 		{
 			MealName = mealName;
 			Link = link;
-			Ingredients = ingredients;
-			MealDays = mealDays;
-			Notes = notes;
+			Ingredients = ingredients ?? new List<Ingredient>();
+			MealDays = mealDays ?? new List<string>();
+			MealTime = mealTime;
 		}
 
 		//Methods
