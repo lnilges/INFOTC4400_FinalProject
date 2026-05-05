@@ -1,16 +1,7 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using System.DirectoryServices.ActiveDirectory;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+
 
 namespace INFOTC4400_FinalProject
 {
@@ -20,11 +11,18 @@ namespace INFOTC4400_FinalProject
     public partial class MainWindow : Window
     {
         public List<Meal> meals = new List<Meal>();
-        public List<GroceryItem> groceryItems = new List<GroceryItem>();
+
+        //binding data to UI so using ObservableCollection
+        public ObservableCollection<GroceryItem> groceryItems = new ObservableCollection<GroceryItem>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            GroceryListBox.ItemsSource = groceryItems;
+
+            MealTimeC_ComboBox.ItemsSource = Enum.GetValues(typeof(MealTimeType));
+            MealTimeC_ComboBox.SelectedIndex = 0;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -33,194 +31,247 @@ namespace INFOTC4400_FinalProject
             try
             {
                 //groceryItems
-                string ingredientName = ItemName_TexBox.Text;
-                double quantityToPurchase = Convert.ToDouble(Quantity_TexBox.Text);
-                string category = Category_TexBox.Text;
+                GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
-                //autoset properties
-                int quantity = Convert.ToInt32(quantityToPurchase);
-                string measurment = "ounce";
-
-                //set grocery properties
-                GroceryItem newItem = new GroceryItem(
-                    ingredientName,
-                    quantity,
-                    measurment,
-                    quantityToPurchase,
-                    category
-                    );
-
-                //add to list
-                groceryItems.Add(newItem);
-
-                //meals
-                string mealName = Meal_TexBox.Text;
-                string link = Link_TexBox.Text;
-
-                //use pre-built list for checkboxes
-                List<String> selectedDays = new List<String>();
-
-                if(Monday_CheckBox.IsChecked == true)
+                if (!string.IsNullOrWhiteSpace(ItemName_TexBox.Text))
                 {
-                    selectedDays.Add("Monday");
-                }
-                if (Tuesday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Tuesday");
-                }
-                if (Wednesday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Wednesday");
-                }
-                if (Thursday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Thursday");
-                }
-                if (Friday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Friday");
-                }
-                if (Saturday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Saturday");
-                }
-                if (Sunday_CheckBox.IsChecked == true)
-                {
-                    selectedDays.Add("Sunday");
-                }
-                if (selectedDays.Count == 0)
-                {
-                    MessageBox.Show("Please select at least 1 day.");
-                    return;
-                }
-
-                string mealDays = string.Join(",", selectedDays);
-
-                MealTimeType mealTime = (MealTimeType)MealTimeC_ComboBox.SelectedItem;
-
-                List<Ingredient> ingredients = new List<Ingredient>();
-
-                //set meal properties
-                Meal newMeal = new Meal(
-                    mealName,
-                    link,
-                    ingredients,
-                    selectedDays,
-                    mealTime
-                    );
-
-                //add to meal list
-                foreach (string day in selectedDays)
-                {
-                    if (day == "Monday")
+                    if (double.TryParse(Quantity_TexBox.Text, out double quantityToPurchase))
                     {
-                        if (mealTime == MealTimeType.Breakfast)
+                        //need to figure out how to implement isBought bool
+                        string ingredientName = ItemName_TexBox.Text;
+                        string category = Category_TexBox.Text;
+                        string measurment = Measurement_TexBox.Text;
+
+                        //autoset properties
+                        int quantity = (int)quantityToPurchase;
+
+                        if (selected != null)
                         {
-                            MondayBreakfast.Items.Add(mealName); 
+                            selected.IngredientName = ingredientName;
+                            selected.Category = category;
+                            selected.Quantity = quantity;
+                            selected.Measurement = measurment;
                         }
-                        else if (mealTime == MealTimeType.Lunch)
+                        else
                         {
-                            MondayLunch.Items.Add(mealName);
+                            //set and add grocery properties
+                            groceryItems.Add(new GroceryItem(
+                                ingredientName,
+                                quantity,
+                                measurment,
+                                quantityToPurchase,
+                                category
+                                ));
                         }
-                        else if (mealTime == MealTimeType.Dinner)
+
+                        //refresh
+                        GroceryListBox.Items.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid number");
+                    }
+
+                    //refresh and populate GroceryList_Listbox
+                    GroceryListBox.Items.Refresh();
+
+                    //clear input fields
+                    ItemName_TexBox.Text = string.Empty;
+                    Quantity_TexBox.Text = string.Empty;
+                    Category_TexBox.Text = string.Empty;
+                    Measurement_TexBox.Text = string.Empty;
+                }
+
+                //saving meals
+                if (!string.IsNullOrWhiteSpace(Meal_TexBox.Text))
+                {
+                    string mealName = Meal_TexBox.Text;
+
+                    //need to figure out what to do when link is attached to a meal
+                    string link = Link_TexBox.Text;
+
+                    //use pre-built list for checkboxes
+                    List<String> selectedDays = new List<String>();
+
+                    if (Monday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Monday");
+                    }
+                    if (Tuesday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Tuesday");
+                    }
+                    if (Wednesday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Wednesday");
+                    }
+                    if (Thursday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Thursday");
+                    }
+                    if (Friday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Friday");
+                    }
+                    if (Saturday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Saturday");
+                    }
+                    if (Sunday_CheckBox.IsChecked == true)
+                    {
+                        selectedDays.Add("Sunday");
+                    }
+
+                    if (selectedDays.Count == 0)
+                    {
+                        return;
+                    }
+
+                    //enum meal combo boxes
+                    MealTimeType mealTime = (MealTimeType)MealTimeC_ComboBox.SelectedItem;
+
+                    List<Ingredient> ingredients = new List<Ingredient>();
+
+                    //set meal properties
+                    Meal newMeal = new Meal(
+                        mealName,
+                        link,
+                        ingredients,
+                        selectedDays,
+                        mealTime
+                        );
+
+                    //add to meal list
+                    //might need to add something that stops a meal from getting entered into an already used meal slot
+                    foreach (string day in selectedDays)
+                    {
+                        if (day == "Monday")
                         {
-                            MondayDinner.Items.Add(mealName);
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                MondayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                MondayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                MondayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Tuesday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                TuesdayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                TuesdayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                TuesdayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Wednesday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                WednesdayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                WednesdayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                WednesdayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Thursday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                ThursdayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                ThursdayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                ThursdayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Friday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                FridayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                FridayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                FridayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Saturday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                SaturdayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                SaturdayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                SaturdayDinner.Items.Add(mealName);
+                            }
+                        }
+                        else if (day == "Sunday")
+                        {
+                            if (mealTime == MealTimeType.Breakfast)
+                            {
+                                SundayBreakfast.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Lunch)
+                            {
+                                SundayLunch.Items.Add(mealName);
+                            }
+                            else if (mealTime == MealTimeType.Dinner)
+                            {
+                                SundayDinner.Items.Add(mealName);
+                            }
                         }
                     }
-                    else if(day == "Tuesday")
-                    {
-                        if (mealTime == MealTimeType.Breakfast)
-                        {
-                            TuesdayBreakfast.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Lunch)
-                        {
-                            TuesdayLunch.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Dinner)
-                        {
-                            TuesdayDinner.Items.Add(mealName);
-                        }
-                    }
-                    else if(day == "Wednesday")
-                    {
-                        if (mealTime == MealTimeType.Breakfast)
-                        {
-                            WednesdayBreakfast.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Lunch)
-                        {
-                            WednesdayLunch.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Dinner)
-                        {
-                            WednesdayDinner.Items.Add(mealName);
-                        }
-                    }
-                    else if(day == "Thursday")
-                    {
-                        if (mealTime == MealTimeType.Breakfast)
-                        {
-                            ThursdayBreakfast.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Lunch)
-                        {
-                            ThursdayLunch.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Dinner)
-                        {
-                            ThursdayDinner.Items.Add(mealName);
-                        }
-                    }
-                    else if(day == "Friday")
-                    {
-                        if(mealTime == MealTimeType.Breakfast)
-                        {
-                            FridayBreakfast.Items.Add(mealName);
-                        }
-                        else if(mealTime == MealTimeType.Lunch)
-                        {
-                            FridayLunch.Items.Add(mealName);
-                        }
-                        else if(mealTime == MealTimeType.Dinner)
-                        {
-                            FridayDinner.Items.Add(mealName);
-                        }
-                    }
-                    else if(day == "Saturday")
-                    {
-                        if(mealTime == MealTimeType.Breakfast)
-                        {
-                            SaturdayBreakfast.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Lunch)
-                        {
-                            SaturdayLunch.Items.Add(mealName);
-                        }
-                        else if (mealTime == MealTimeType.Dinner)
-                        {
-                            SaturdayDinner.Items.Add(mealName);
-                        }
-                    }
-                    else if(day == "Sunday")
-                    {
-                        if(mealTime == MealTimeType.Breakfast)
-                        {
-                            SundayBreakfast.Items.Add(mealName);
-                        }
-                        else if(mealTime == MealTimeType.Lunch)
-                        {
-                            SundayLunch.Items.Add(mealName);
-                        }
-                        else if(mealTime == MealTimeType.Dinner)
-                        {
-                            SundayDinner.Items.Add(mealName);
-                        }
-                    }
+
+                    //Clear input fields
+                    Meal_TexBox.Text = string.Empty;
+                    MealTimeC_ComboBox.SelectedIndex = 0;
+                    Link_TexBox.Text = string.Empty;
+
+                    //checkbox 
+                    Link_TexBox.Text = string.Empty;
+                    Monday_CheckBox.IsChecked = false;
+                    Tuesday_CheckBox.IsChecked = false;
+                    Wednesday_CheckBox.IsChecked = false;
+                    Thursday_CheckBox.IsChecked = false;
+                    Friday_CheckBox.IsChecked = false;
+                    Saturday_CheckBox.IsChecked = false;
+                    Sunday_CheckBox.IsChecked = false;
+
                 }
 
             }
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -228,14 +279,59 @@ namespace INFOTC4400_FinalProject
 
         private void GroceryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            try
+            {
+                GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
+
+                if (selected == null) 
+                {
+                    return;
+                }
+
+                ItemName_TexBox.Text = selected.IngredientName;
+                Quantity_TexBox.Text = Convert.ToString(selected.Quantity);
+                Category_TexBox.Text = selected.Category;
+                Measurement_TexBox.Text = selected.Measurement;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             //after an item on listbox is selected, pop up in the text boxes and deleted
+            GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
+            if (selected != null)
+            {
+                groceryItems.Remove(selected);
+            }
+
+            //clear input fields
+            ItemName_TexBox.Text = string.Empty;
+            Quantity_TexBox.Text = string.Empty;
+            Category_TexBox.Text = string.Empty;
+            Measurement_TexBox.Text = string.Empty;
+
+            GroceryListBox.Items.Refresh();
+
+            //need to add delete functionality for meals
+        }
+
+        private void ClearAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            //need to clear all inputs and any lists
+
+        }
+
+        //need to sort by A-Z, Z-A, and category
+        private void Filter_ComboBox(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

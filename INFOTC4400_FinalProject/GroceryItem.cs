@@ -44,7 +44,7 @@ namespace INFOTC4400_FinalProject
         public override string ToString()
         {
 			string bought = IsBought ? "[X]" : "[ ]";
-			return $"{bought}{IngredientName} - {QuantityToPurchase}, {Category}";
+			return $"{bought}{IngredientName} - {QuantityToPurchase} {Measurement}, {Category}";
         }
 
         //method to check off item on list ~~
