@@ -41,6 +41,7 @@ namespace INFOTC4400_FinalProject
                         string ingredientName = ItemName_TexBox.Text;
                         string category = Category_TexBox.Text;
                         string measurment = Measurement_TexBox.Text;
+                        bool isBought = IsBought_CheckBox.IsChecked == true;
 
                         //autoset properties
                         int quantity = (int)quantityToPurchase;
@@ -51,6 +52,7 @@ namespace INFOTC4400_FinalProject
                             selected.Category = category;
                             selected.Quantity = quantity;
                             selected.Measurement = measurment;
+                            selected.IsBought = isBought;
                         }
                         else
                         {
@@ -60,12 +62,11 @@ namespace INFOTC4400_FinalProject
                                 quantity,
                                 measurment,
                                 quantityToPurchase,
-                                category
+                                category,
+                                isBought
                                 ));
                         }
 
-                        //refresh
-                        GroceryListBox.Items.Refresh();
                     }
                     else
                     {
@@ -80,6 +81,7 @@ namespace INFOTC4400_FinalProject
                     Quantity_TexBox.Text = string.Empty;
                     Category_TexBox.Text = string.Empty;
                     Measurement_TexBox.Text = string.Empty;
+                    IsBought_CheckBox.IsChecked = false;
                 }
 
                 //saving meals
@@ -277,6 +279,29 @@ namespace INFOTC4400_FinalProject
             }
         }
 
+        private void IsBought(object sender, RoutedEventArgs e)
+        {
+            try 
+            {
+                GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
+
+                if (selected == null)
+                {
+                    return;
+                }
+
+                selected.IsBought = IsBought_CheckBox.IsChecked == true;
+
+                GroceryListBox.Items.Refresh();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void GroceryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -292,6 +317,7 @@ namespace INFOTC4400_FinalProject
                 Quantity_TexBox.Text = Convert.ToString(selected.Quantity);
                 Category_TexBox.Text = selected.Category;
                 Measurement_TexBox.Text = selected.Measurement;
+                IsBought_CheckBox.IsChecked = selected.IsBought;
 
             }
             catch(Exception ex)
@@ -316,22 +342,109 @@ namespace INFOTC4400_FinalProject
             Quantity_TexBox.Text = string.Empty;
             Category_TexBox.Text = string.Empty;
             Measurement_TexBox.Text = string.Empty;
+            IsBought_CheckBox.IsChecked = false;
 
             GroceryListBox.Items.Refresh();
 
             //need to add delete functionality for meals
         }
 
+        //Syd work on these
         private void ClearAllButton_Click(object sender, RoutedEventArgs e)
         {
             //need to clear all inputs and any lists
+            //clear grocery items
+            GroceryListBox.ItemsSource = groceryItems;
+            groceryItems.Clear();
 
+            //clear grocery list input fields
+            ItemName_TexBox.Text = string.Empty;
+            Quantity_TexBox.Text = string.Empty;
+            Category_TexBox.Text = string.Empty;
+            Measurement_TexBox.Text = string.Empty;
+            IsBought_CheckBox.IsChecked = false;
+
+
+            //Clear meal input fields
+            Meal_TexBox.Text = string.Empty;
+            MealTimeC_ComboBox.SelectedIndex = 0;
+            Link_TexBox.Text = string.Empty;
+
+            MondayBreakfast.Items.Clear();
+            MondayLunch.Items.Clear();
+            MondayDinner.Items.Clear();
+            TuesdayBreakfast.Items.Clear();
+            TuesdayLunch.Items.Clear();
+            TuesdayDinner.Items.Clear();
+            WednesdayBreakfast.Items.Clear();
+            WednesdayLunch.Items.Clear();
+            WednesdayDinner.Items.Clear();
+            ThursdayBreakfast.Items.Clear();
+            ThursdayLunch.Items.Clear();
+            ThursdayDinner.Items.Clear();
+            FridayBreakfast.Items.Clear();
+            FridayLunch.Items.Clear();
+            FridayDinner.Items.Clear();
+            SaturdayBreakfast.Items.Clear();
+            SaturdayLunch.Items.Clear();
+            SaturdayDinner.Items.Clear();
+            SundayBreakfast.Items.Clear();
+            SundayLunch.Items.Clear();
+            SundayDinner.Items.Clear();
+
+            //checkbox 
+            Link_TexBox.Text = string.Empty;
+            Monday_CheckBox.IsChecked = false;
+            Tuesday_CheckBox.IsChecked = false;
+            Wednesday_CheckBox.IsChecked = false;
+            Thursday_CheckBox.IsChecked = false;
+            Friday_CheckBox.IsChecked = false;
+            Saturday_CheckBox.IsChecked = false;
+            Sunday_CheckBox.IsChecked = false;
+
+            //clear meals list
+            meals.Clear();
         }
 
         //need to sort by A-Z, Z-A, and category
-        private void Filter_ComboBox(object sender, RoutedEventArgs e)
+        private void Filter_ComboBox(object sender, SelectionChangedEventArgs e)
         {
-            
+            ComboBoxItem selectedItem = FilterComboBox.SelectedItem as ComboBoxItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            string filter = selectedItem.Content?.ToString();
+
+            if (filter == null)
+            {
+                return;
+            }
+
+            List<GroceryItem> sortedList;
+
+            if (filter == "A-Z")
+            {
+                sortedList = groceryItems.OrderBy(g => g.IngredientName).ToList();
+            }
+            else if (filter == "Z-A")
+            {
+                sortedList = groceryItems.OrderByDescending(g => g.IngredientName).ToList();
+            }
+            else if (filter == "Category")
+            {
+                sortedList = groceryItems.OrderBy(g => g.Category).ToList();
+            }
+            else
+            {
+                GroceryListBox.ItemsSource = groceryItems;
+                return;
+            }
+
+            GroceryListBox.ItemsSource = sortedList;
+
         }
     }
 }
