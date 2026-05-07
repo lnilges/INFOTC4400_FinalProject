@@ -446,6 +446,49 @@ namespace INFOTC4400_FinalProject
             GroceryListBox.ItemsSource = sortedList;
 
         }
+
+
+        //method to display meal information in form when user selects meal in planner
+        private void Meal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                //get the listbox name from the xaml page
+                ListBox listBox = sender as ListBox;
+
+                //get the selected meal information 
+                Meal selected = listBox?.SelectedItem as Meal;
+
+                //if null, return
+                if (selected == null)
+                {
+                    return;
+                }
+
+                //display the information associated with the meal in the form
+                Meal_TexBox.Text = selected.MealName;
+                Link_TexBox.Text = selected.Link;
+
+                MealTimeC_ComboBox.SelectedItem = selected.MealTime;
+
+                Monday_CheckBox.IsChecked = selected.MealDays.Contains("Monday");
+                Tuesday_CheckBox.IsChecked = selected.MealDays.Contains("Tuesday");
+                Wednesday_CheckBox.IsChecked = selected.MealDays.Contains("Wednesday");
+                Thursday_CheckBox.IsChecked = selected.MealDays.Contains("Thursday");
+                Friday_CheckBox.IsChecked = selected.MealDays.Contains("Friday");
+                Saturday_CheckBox.IsChecked = selected.MealDays.Contains("Saturday");
+                Sunday_CheckBox.IsChecked = selected.MealDays.Contains("Sunday");
+
+                //clear the selected listbox
+                listBox.SelectedItem = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
     }
 }
 

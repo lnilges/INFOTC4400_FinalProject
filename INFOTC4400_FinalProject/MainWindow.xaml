@@ -114,9 +114,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="SundayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="SundayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="SundayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="SundayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="SundayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="SundayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -144,9 +144,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="MondayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="MondayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="MondayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="MondayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="MondayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="MondayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
 
                         </Grid>
                     </Grid>
@@ -178,9 +178,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="TuesdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="TuesdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="TuesdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="TuesdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="TuesdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="TuesdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -208,9 +208,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="WednesdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="WednesdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="WednesdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="WednesdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="WednesdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="WednesdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -241,9 +241,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="ThursdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="ThursdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="ThursdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="ThursdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="ThursdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="ThursdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -274,9 +274,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="FridayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="FridayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="FridayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="FridayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="FridayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="FridayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -307,9 +307,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="SaturdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="SaturdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
-                            <ListBox x:Name="SaturdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                            <ListBox x:Name="SaturdayBreakfast" Height="23" Grid.Row="0" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="SaturdayLunch" Height="23" Grid.Row="1" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
+                            <ListBox x:Name="SaturdayDinner" Height="23" Grid.Row="2" FontSize="13" VerticalAlignment="Center" BorderBrush="Transparent" SelectionChanged="Meal_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>
