@@ -54,6 +54,10 @@ namespace INFOTC4400_FinalProject
 		{
             MealDays.Remove(day);
         }
-		
+
+        public override string ToString()
+        {
+			return MealName;
+        }
 	}
 }

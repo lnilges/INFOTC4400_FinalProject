@@ -33,6 +33,13 @@ namespace INFOTC4400_FinalProject
                 //groceryItems
                 GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
+                //if a meal is selected from the list, when save is clicked, it will updated the meal information using Update_Meal method
+                if(selectedMeal != null)
+                {
+                    Update_Meal(selectedMeal);
+                    return;
+                }
+
                 if (!string.IsNullOrWhiteSpace(ItemName_TexBox.Text))
                 {
                     if (double.TryParse(Quantity_TexBox.Text, out double quantityToPurchase))
@@ -151,105 +158,105 @@ namespace INFOTC4400_FinalProject
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                MondayBreakfast.Items.Add(mealName);
+                                MondayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                MondayLunch.Items.Add(mealName);
+                                MondayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                MondayDinner.Items.Add(mealName);
+                                MondayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Tuesday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                TuesdayBreakfast.Items.Add(mealName);
+                                TuesdayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                TuesdayLunch.Items.Add(mealName);
+                                TuesdayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                TuesdayDinner.Items.Add(mealName);
+                                TuesdayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Wednesday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                WednesdayBreakfast.Items.Add(mealName);
+                                WednesdayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                WednesdayLunch.Items.Add(mealName);
+                                WednesdayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                WednesdayDinner.Items.Add(mealName);
+                                WednesdayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Thursday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                ThursdayBreakfast.Items.Add(mealName);
+                                ThursdayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                ThursdayLunch.Items.Add(mealName);
+                                ThursdayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                ThursdayDinner.Items.Add(mealName);
+                                ThursdayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Friday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                FridayBreakfast.Items.Add(mealName);
+                                FridayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                FridayLunch.Items.Add(mealName);
+                                FridayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                FridayDinner.Items.Add(mealName);
+                                FridayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Saturday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                SaturdayBreakfast.Items.Add(mealName);
+                                SaturdayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                SaturdayLunch.Items.Add(mealName);
+                                SaturdayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                SaturdayDinner.Items.Add(mealName);
+                                SaturdayDinner.Items.Add(newMeal);
                             }
                         }
                         else if (day == "Sunday")
                         {
                             if (mealTime == MealTimeType.Breakfast)
                             {
-                                SundayBreakfast.Items.Add(mealName);
+                                SundayBreakfast.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Lunch)
                             {
-                                SundayLunch.Items.Add(mealName);
+                                SundayLunch.Items.Add(newMeal);
                             }
                             else if (mealTime == MealTimeType.Dinner)
                             {
-                                SundayDinner.Items.Add(mealName);
+                                SundayDinner.Items.Add(newMeal);
                             }
                         }
                     }
@@ -346,7 +353,12 @@ namespace INFOTC4400_FinalProject
 
             GroceryListBox.Items.Refresh();
 
-            //need to add delete functionality for meals
+            //calls method for deleting meal, sends the selected meal from the listboxes
+            if (selectedMeal != null)
+            {
+                Delete_Meal(selectedMeal);
+                return;
+            }
         }
 
         //Syd work on these
@@ -447,6 +459,8 @@ namespace INFOTC4400_FinalProject
 
         }
 
+        //stores the meal that is being edited so that it can be updated by clicking the save button
+        Meal selectedMeal;
 
         //method to display meal information in form when user selects meal in planner
         private void Meal_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -459,12 +473,15 @@ namespace INFOTC4400_FinalProject
                 //get the selected meal information 
                 Meal selected = listBox?.SelectedItem as Meal;
 
+                //save the meal that is selected to the editedMeal variable
+                selectedMeal = selected;
+
                 //if null, return
                 if (selected == null)
                 {
                     return;
                 }
-
+           
                 //display the information associated with the meal in the form
                 Meal_TexBox.Text = selected.MealName;
                 Link_TexBox.Text = selected.Link;
@@ -481,6 +498,7 @@ namespace INFOTC4400_FinalProject
 
                 //clear the selected listbox
                 listBox.SelectedItem = null;
+                selectedMeal = null;
             }
             catch (Exception ex)
             {
@@ -488,7 +506,64 @@ namespace INFOTC4400_FinalProject
             }
         }
 
+        //method to update a meal - takes the meal that is selected 
+        private void Update_Meal(Meal editedMeal)
+        {
+            //get all parameters from the form to update meal object
+            editedMeal.MealName = Meal_TexBox.Text;
+            editedMeal.Link = Link_TexBox.Text;
+            editedMeal.MealTime = (MealTimeType)MealTimeC_ComboBox.SelectedItem;
 
+            editedMeal.MealDays.Clear();
+
+            if (Monday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Monday");
+            }
+            if (Tuesday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Tuesday");
+            }
+            if (Wednesday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Wednesday");
+            }
+            if (Thursday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Thursday");
+            }
+            if (Friday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Friday");
+            }
+            if (Saturday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Saturday");
+            }
+            if (Sunday_CheckBox.IsChecked == true)
+            {
+                editedMeal.MealDays.Add("Sunday");
+            }
+
+            if (editedMeal.MealDays.Count == 0)
+            {
+                return;
+            }
+
+            //add refresh for listbox so they display updated information in all boxes
+            //maybe make a refresh function that can be called in multple places
+        }
+
+        //method to delete meal from meal planner
+        //NOT WORKING YET
+        private void Delete_Meal(Meal deletedMeal)
+        {
+            //remove meal from meal list
+            meals.Remove(deletedMeal);
+
+            //add refresh to update listboxes
+            SundayDinner.Items.Refresh();
+        }
     }
 }
 
