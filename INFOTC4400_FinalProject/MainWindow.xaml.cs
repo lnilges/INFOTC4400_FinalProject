@@ -1,6 +1,10 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
+using static System.Net.WebRequestMethods;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 
 namespace INFOTC4400_FinalProject
@@ -94,10 +98,20 @@ namespace INFOTC4400_FinalProject
                 //saving meals
                 if (!string.IsNullOrWhiteSpace(Meal_TexBox.Text))
                 {
+                    //get meal name from form, show error message and return in blank
                     string mealName = Meal_TexBox.Text;
+                    if (mealName == "")
+                    {
+                        MessageBox.Show("ERROR: Please enter a meal name");
+                        return;
+                    }
 
-                    //need to figure out what to do when link is attached to a meal
+                    //link not required for form, if user enters a link use spoonacular api to get ingredient and add them to grocery list
                     string link = Link_TexBox.Text;
+                    if (link != null)
+                    {
+                        GetIngredients(link);
+                    }
 
                     //use pre-built list for checkboxes
                     List<String> selectedDays = new List<String>();
@@ -131,8 +145,10 @@ namespace INFOTC4400_FinalProject
                         selectedDays.Add("Sunday");
                     }
 
+                    //if no days are selected, show error message and return
                     if (selectedDays.Count == 0)
                     {
+                        MessageBox.Show("ERROR: Please select days for the meal");
                         return;
                     }
 
@@ -171,26 +187,31 @@ namespace INFOTC4400_FinalProject
                 }
 
             }
-
+            
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
+        //method to check off gorcery items from gorcery list
         private void IsBought(object sender, RoutedEventArgs e)
         {
             try 
             {
+                //get the selected grocery item
                 GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
+                //if not item is selected, return
                 if (selected == null)
                 {
                     return;
                 }
 
+                //if the item that is checked, mark the item as bought
                 selected.IsBought = IsBought_CheckBox.IsChecked == true;
 
+                //refresh grocery list
                 GroceryListBox.Items.Refresh();
 
             }
@@ -201,17 +222,21 @@ namespace INFOTC4400_FinalProject
 
         }
 
+        //method to fill in grocery item information into the form when selected in the grocery list
         private void GroceryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
+                //get the selected item from the list
                 GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
+                //is nothing is selected, return
                 if (selected == null) 
                 {
                     return;
                 }
 
+                //fill in the information
                 ItemName_TexBox.Text = selected.IngredientName;
                 Quantity_TexBox.Text = Convert.ToString(selected.Quantity);
                 Category_TexBox.Text = selected.Category;
@@ -226,8 +251,10 @@ namespace INFOTC4400_FinalProject
 
         }
 
+        //button to delete grocery item or meal from planner
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            //delete a meal if selected from the meal planner
             if (selectedMeal != null)
             {
                 Delete_Meal(selectedMeal);
@@ -492,7 +519,7 @@ namespace INFOTC4400_FinalProject
             Sunday_CheckBox.IsChecked = false;
         }
 
-        //Method to add meals to planner
+        //AddMeals adds a meal to the planner on the days/time filled in by the user in the form
         private void AddMeals(Meal newMeal)
         {
             foreach (string day in newMeal.MealDays)
@@ -668,13 +695,35 @@ namespace INFOTC4400_FinalProject
             SundayLunch.Items.Refresh();
             SundayDinner.Items.Refresh();
         }
+
+        //API
+        //API Key: ad535ad64e1e49548fe730e449379b03
+        //use spoonacular API to send link for recipe and get ingredient information
+        //take each ingredient and turn into ingredient object and add to grocery list
+        string api = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
+
+        public async Task GetIngredients(string link)
+        {
+            try
+            {
+
+                
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
 
 //To-do:
-//add ingredients to meal in some way, need to use the ingredient class somewhere
+//add ingredients to meal in some way, need to use the ingredient class somewhere - spoonacular api
 //need to try to pull ingredients from link entered
 //check for blank fields in meal form
+//add meals to the meals list whn created
+//JSON - database??
+//validation for all fields
 
 //Components:
 
