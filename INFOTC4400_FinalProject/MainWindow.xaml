@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INFOTC4400_FinalProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="600" Background="AntiqueWhite">
+        Title="MainWindow" Height="675" Width="600" Background="AntiqueWhite">
     <Grid>
         <Grid>
             <!--This is to split the "plan" side and "Grocery/notes" side of the -->
@@ -20,7 +20,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="300"/>
                     </Grid.RowDefinitions>
 
@@ -34,7 +34,7 @@
                         <ComboBoxItem Content="Category"/>
                     </ComboBox>
                     <Label Content="Grocery List" Grid.Row="0" FontWeight="Bold"  FontSize="15"  Margin="50,20,50,0" Width="100" VerticalAlignment="Top"/>
-                    <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" x:Name="GroceryListBox" SelectionChanged="GroceryList_SelectionChanged" Grid.Row="1" HorizontalAlignment="Left" Height="250" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" />
+                    <ListBox BorderBrush="RosyBrown" BorderThickness="1.5" x:Name="GroceryListBox" SelectionChanged="GroceryList_SelectionChanged" Grid.Row="1" HorizontalAlignment="Left" Height="245" Margin="25,0,0,0" VerticalAlignment="Top" Width="200" />
 
                     <Label Content="Item" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Grid.RowSpan="2"/>
                     <TextBox BorderBrush="RosyBrown" x:Name="ItemName_TexBox" Grid.Row="3" HorizontalAlignment="Right" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Grid.RowSpan="2"/>

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using static System.Net.WebRequestMethods;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Runtime.InteropServices.JavaScript;
@@ -703,16 +704,38 @@ namespace INFOTC4400_FinalProject
         //take each ingredient and turn into ingredient object and add to grocery list
         //string apiUrl = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
 
-        public async Task GetIngredients(string link)
+        public async Task<ObservableCollection<GroceryItem>> GetIngredients(string link)
         {
             try
             {
-                //var ingredients = await GetIngredientsUrl(link);
+                using (var client = new HttpClient()) 
+                {
                 
-            }
-            catch
-            {
+                    string endcodedLink = Uri.EscapeDataString(link);
 
+                    string apiUrl = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    response.EnsureSuccessStatusCode();
+
+                    string json = await response.Content.ReadAsStringAsync();
+                    JObject data = JObject.Parse(json);
+
+                    ObservableCollection<GroceryItem> groceryItems = new ObservableCollection<GroceryItem>();
+                    var ingredients = data["extendedIngredients"];
+
+                    if (ingredients != null)
+                    {
+                        //
+                    }
+
+                }
+
+                //var ingredients = await GetIngredientsUrl(link);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
