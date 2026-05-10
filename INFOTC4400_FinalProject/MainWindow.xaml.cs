@@ -5,6 +5,7 @@ using static System.Net.WebRequestMethods;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Runtime.InteropServices.JavaScript;
 
 
 namespace INFOTC4400_FinalProject
@@ -700,13 +701,13 @@ namespace INFOTC4400_FinalProject
         //API Key: ad535ad64e1e49548fe730e449379b03
         //use spoonacular API to send link for recipe and get ingredient information
         //take each ingredient and turn into ingredient object and add to grocery list
-        string api = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
+        //string apiUrl = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
 
         public async Task GetIngredients(string link)
         {
             try
             {
-
+                //var ingredients = await GetIngredientsUrl(link);
                 
             }
             catch
@@ -714,6 +715,26 @@ namespace INFOTC4400_FinalProject
 
             }
         }
+
+        //static async Task<string[]> GetIngredientsUrl(string link)
+        //{
+            //using (var client = new HttpClient())
+            //{
+                //string url = $"https://api.spoonacular.com/recipes/extract?url={link}&apiKey=ad535ad64e1e49548fe730e449379b03";
+                //HttpResponseMessage response = await client.GetAsync(url);
+                //response.EnsureSuccessStatusCode();
+
+                //string json = await response.Content.ReadAsStringAsync();
+                //JObject data = JObject.Parse(json);
+
+                //var ingredients = data["extendedIngredients"]?
+                //    .Select(i => i["originalString"]?.ToString())
+                //    .Where(s => !string.IsNullOrWhiteSpace(s))
+                //   .ToArray();
+
+                //return ingredients ?? Array.Empty<string>;
+            //}
+        //}
     }
 }
 
