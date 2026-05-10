@@ -671,6 +671,10 @@ namespace INFOTC4400_FinalProject
     }
 }
 
+//To-do:
+//add ingredients to meal in some way, need to use the ingredient class somewhere
+//need to try to pull ingredients from link entered
+//check for blank fields in meal form
 
 //Components:
 
