@@ -52,7 +52,8 @@
                     <CheckBox Grid.Row="3" x:Name="IsBought_CheckBox" Checked="IsBought" Margin="220,120,0,150" HorizontalAlignment="Left" Width="48" />
 
                     <Button Grid.Row="3" Height="23" Width="50" Content="Save" x:Name="SaveButton" BorderBrush="RosyBrown" Background="white" Click="SaveButton_Click" Margin="195,142,0,135" HorizontalAlignment="Left"/>
-                    <Button Grid.Row="3" Height="23" Width="50" Content="Delete" x:Name="DeletButton" BorderBrush="RosyBrown" Background="white" Click="DeleteButton_Click" Margin="140,139,58,133"/>
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Delete" x:Name="DeletButton" BorderBrush="RosyBrown" Background="white" Click="DeleteButton_Click" Margin="140,140,58,133"/>
+                    <Button Grid.Row="3" Height="23" Width="50" Content="Show" x:Name="ShowIngredientsButton" BorderBrush="RosyBrown" Background="white" Click="ShowIngredientsButton_Click" Margin="30,140,58,133"/>
 
                     <!--Meals-->
                     <Label Content="Meal Name" Grid.Row="3" FontSize="14" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="0,170,0,0" Grid.RowSpan="2"/>

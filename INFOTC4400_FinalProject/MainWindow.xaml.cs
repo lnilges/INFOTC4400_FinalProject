@@ -96,6 +96,9 @@ namespace INFOTC4400_FinalProject
                     Category_TexBox.Text = string.Empty;
                     Measurement_TexBox.Text = string.Empty;
                     IsBought_CheckBox.IsChecked = false;
+
+                    //clear the selected grocery item
+                    GroceryListBox.SelectedItem = null;
                 }
 
                 //saving meals
@@ -168,7 +171,7 @@ namespace INFOTC4400_FinalProject
                     //get the ingredients from the url, add to meal's ingredient list and add ingreidents to grocery list
                     if (!string.IsNullOrWhiteSpace(link))
                     {
-                        GetIngredients(link, newMeal);
+                        await GetIngredients(link, newMeal);
                     }
 
                     //add to meal list
@@ -267,6 +270,10 @@ namespace INFOTC4400_FinalProject
                 return;
             }
 
+
+            //make sure listbox is using real collection
+            GroceryListBox.ItemsSource = groceryItems;
+
             //after an item on listbox is selected, pop up in the text boxes and deleted
             GroceryItem selected = GroceryListBox.SelectedItem as GroceryItem;
 
@@ -282,6 +289,44 @@ namespace INFOTC4400_FinalProject
             Category_TexBox.Text = string.Empty;
             Measurement_TexBox.Text = string.Empty;
             IsBought_CheckBox.IsChecked = false;
+
+            //clear selected list item
+            GroceryListBox.SelectedItem = null;
+        }
+
+        private void ShowIngredientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            //need to have a popup that shows the specific ingredients for each meal
+            try
+            {
+                //make sure a meal is selected
+                if (selectedMeal == null)
+                {
+                    MessageBox.Show("Please select a meal first.");
+                    return;
+                }
+
+                //see if the meal has any ingredients at all
+                if (selectedMeal.Ingredients == null || selectedMeal.Ingredients.Count == 0)
+                {
+                    MessageBox.Show("There are no igredients found for this meal.");
+                }
+
+                //set up ingredients string
+                string ingredientList = "";
+
+                foreach(Ingredient ingredient in selectedMeal.Ingredients)
+                {
+                    ingredientList += $"{ingredient.Quantity} {ingredient.Measurement} {ingredient.IngredientName}\n";
+                }
+
+                MessageBox.Show($"{selectedMeal.MealName}'s Ingredients:\n\n{ingredientList}");
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //Syd work on these
@@ -298,7 +343,7 @@ namespace INFOTC4400_FinalProject
             Category_TexBox.Text = string.Empty;
             Measurement_TexBox.Text = string.Empty;
             IsBought_CheckBox.IsChecked = false;
-
+            GroceryListBox.SelectedItem = null;
 
             //Clear meal input fields
             Meal_TexBox.Text = string.Empty;
