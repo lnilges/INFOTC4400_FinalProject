@@ -58,7 +58,7 @@ namespace INFOTC4400_FinalProject
                         bool isBought = IsBought_CheckBox.IsChecked == true;
 
                         //autoset properties
-                        int quantity = (int)quantityToPurchase;
+                        double quantity = (double)quantityToPurchase;
 
                         if (selected != null)
                         {
@@ -294,6 +294,7 @@ namespace INFOTC4400_FinalProject
             GroceryListBox.SelectedItem = null;
         }
 
+        //need to have the quantity as double
         private void ShowIngredientsButton_Click(object sender, RoutedEventArgs e)
         {
             //need to have a popup that shows the specific ingredients for each meal
@@ -329,7 +330,6 @@ namespace INFOTC4400_FinalProject
             }
         }
 
-        //Syd work on these
         private void ClearAllButton_Click(object sender, RoutedEventArgs e)
         {
             //need to clear all inputs and any lists
@@ -793,7 +793,7 @@ namespace INFOTC4400_FinalProject
                         //get the ingredient information 
                         string ingredientName = ingredient["name"]?.ToString();
                         double quantityToPurchase = ingredient["amount"]?.ToObject<double>() ?? 0;
-                        int quantity = ingredient["amount"]?.ToObject<int>() ?? 0;
+                        double quantity = ingredient["amount"]?.ToObject<double>() ?? 0;
                         string measurement = ingredient["unit"]?.ToString();
 
                         //create ingredients and add to meal's ingredient list

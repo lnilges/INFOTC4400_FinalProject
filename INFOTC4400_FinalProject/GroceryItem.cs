@@ -11,7 +11,7 @@ namespace INFOTC4400_FinalProject
 		public double QuantityToPurchase { get; set; }
 		public string Category { get; set; }
 
-		public GroceryItem(string ingredientName, int quantity, string measurement, double quantityToPurchase, string category, bool isBought) : base(ingredientName, quantity, measurement)
+		public GroceryItem(string ingredientName, double quantity, string measurement, double quantityToPurchase, string category, bool isBought) : base(ingredientName, quantity, measurement)
 		{
 			//I want to add items like ingredients to the grocerylist and then pull the list into the listbox - do with ingredient list in meal class??
 			IsBought = false;
