@@ -1,12 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using static System.Net.WebRequestMethods;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Runtime.InteropServices.JavaScript;
 
 
 namespace INFOTC4400_FinalProject
@@ -31,7 +32,7 @@ namespace INFOTC4400_FinalProject
             MealTimeC_ComboBox.SelectedIndex = 0;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             //want to save either grociery items or meals
             try
@@ -110,10 +111,6 @@ namespace INFOTC4400_FinalProject
 
                     //link not required for form, if user enters a link use spoonacular api to get ingredient and add them to grocery list
                     string link = Link_TexBox.Text;
-                    if (link != null)
-                    {
-                        GetIngredients(link);
-                    }
 
                     //use pre-built list for checkboxes
                     List<String> selectedDays = new List<String>();
@@ -167,6 +164,12 @@ namespace INFOTC4400_FinalProject
                         selectedDays,
                         mealTime
                         );
+
+                    //get the ingredients from the url, add to meal's ingredient list and add ingreidents to grocery list
+                    if (!string.IsNullOrWhiteSpace(link))
+                    {
+                        GetIngredients(link, newMeal);
+                    }
 
                     //add to meal list
                     AddMeals(newMeal);
@@ -437,8 +440,10 @@ namespace INFOTC4400_FinalProject
             editedMeal.Link = Link_TexBox.Text;
             editedMeal.MealTime = (MealTimeType)MealTimeC_ComboBox.SelectedItem;
 
+            //clear the meal days variable
             editedMeal.MealDays.Clear();
 
+            //add the days that are selected to the mealdays list
             if (Monday_CheckBox.IsChecked == true)
             {
                 editedMeal.MealDays.Add("Monday");
@@ -468,8 +473,10 @@ namespace INFOTC4400_FinalProject
                 editedMeal.MealDays.Add("Sunday");
             }
 
+            //return if not meals are selected
             if (editedMeal.MealDays.Count == 0)
             {
+                MessageBox.Show("Error: please select days");
                 return;
             }
 
@@ -704,69 +711,81 @@ namespace INFOTC4400_FinalProject
         //take each ingredient and turn into ingredient object and add to grocery list
         //string apiUrl = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
 
-        public async Task<ObservableCollection<GroceryItem>> GetIngredients(string link)
+        public async Task<ObservableCollection<GroceryItem>> GetIngredients(string link, Meal meal)
         {
             try
             {
                 using (var client = new HttpClient()) 
                 {
-                
+                    //encode the recipe url
                     string endcodedLink = Uri.EscapeDataString(link);
 
-                    string apiUrl = "https://api.spoonacular.com/recipes/extract?url={RECIPE_URL}&apiKey=ad535ad64e1e49548fe730e449379b03";
+                    //API url
+                    string apiUrl = $"https://api.spoonacular.com/recipes/extract?url={endcodedLink}&apiKey=ad535ad64e1e49548fe730e449379b03";
+
+                    //send request
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
                     response.EnsureSuccessStatusCode();
 
+                    //read JSON 
                     string json = await response.Content.ReadAsStringAsync();
                     JObject data = JObject.Parse(json);
 
+                    //get the ingredient array
                     ObservableCollection<GroceryItem> groceryItems = new ObservableCollection<GroceryItem>();
                     var ingredients = data["extendedIngredients"];
 
-                    if (ingredients != null)
+                    //if ingredients does not return anything, an error message appears
+                    if (ingredients == null)
                     {
-                        //
+                        MessageBox.Show("No ingredients found for this recipe");
+                        return null;
                     }
 
+                    //go through each ingredient in the list
+                    foreach (var ingredient in ingredients)
+                    {
+                        //get the ingredient information 
+                        string ingredientName = ingredient["name"]?.ToString();
+                        double quantityToPurchase = ingredient["amount"]?.ToObject<double>() ?? 0;
+                        int quantity = ingredient["amount"]?.ToObject<int>() ?? 0;
+                        string measurement = ingredient["unit"]?.ToString();
+
+                        //create ingredients and add to meal's ingredient list
+                        meal.Ingredients.Add(new Ingredient(
+                            ingredientName,
+                            quantity,
+                            measurement
+                        ));
+
+                        //create grocery item and add to grocery list
+                        this.groceryItems.Add(new GroceryItem(
+                            ingredientName,
+                            quantity,
+                            measurement,
+                            quantityToPurchase,
+                            "",
+                            false
+                        ));
+                    }
+                    //refresh the list and return the list of grocery items
+                    GroceryListBox.Items.Refresh();
+                    return groceryItems;
                 }
-
-                //var ingredients = await GetIngredientsUrl(link);
-
             }
+            //if an error occurs, show a message box with the error message
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error retreiving ingredients: " + ex.Message);
+                return null;
             }
         }
-
-        //static async Task<string[]> GetIngredientsUrl(string link)
-        //{
-            //using (var client = new HttpClient())
-            //{
-                //string url = $"https://api.spoonacular.com/recipes/extract?url={link}&apiKey=ad535ad64e1e49548fe730e449379b03";
-                //HttpResponseMessage response = await client.GetAsync(url);
-                //response.EnsureSuccessStatusCode();
-
-                //string json = await response.Content.ReadAsStringAsync();
-                //JObject data = JObject.Parse(json);
-
-                //var ingredients = data["extendedIngredients"]?
-                //    .Select(i => i["originalString"]?.ToString())
-                //    .Where(s => !string.IsNullOrWhiteSpace(s))
-                //   .ToArray();
-
-                //return ingredients ?? Array.Empty<string>;
-            //}
-        //}
     }
 }
 
 //To-do:
-//add ingredients to meal in some way, need to use the ingredient class somewhere - spoonacular api
-//need to try to pull ingredients from link entered
 //check for blank fields in meal form
 //add meals to the meals list whn created
-//JSON - database??
 //validation for all fields
 
 //Components:
